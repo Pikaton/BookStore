@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог книг BookStore. Выбирайте книги по жанрам и категориям.">
+    <title>Каталог книг - BookStore</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-body">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="header__logo">
+                        <span class="header__logo-icon">📚</span>
+                        <span class="header__logo-text">BookStore</span>
+                    </a>
+                    <div class="header__actions">
+                        <a href="cart.html" class="header__cart-link">
+                            <span>Корзина</span>
+                            <span class="header__cart-count" id="cart-count">0</span>
+                        </a>
+                        <a href="register.html" class="header__user-link" id="auth-link">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container">
+                <button class="nav__toggle" id="nav-toggle" aria-label="Меню">☰</button>
+                <ul class="nav__list" id="nav-list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html" class="nav__link nav__link--active">Каталог</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=fantasy" class="nav__link">Фантастика</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=romance" class="nav__link">Романы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=detective" class="nav__link">Детективы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=adventure" class="nav__link">Приключения</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=educational" class="nav__link">Учебные материалы</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-header__title" id="page-title">Каталог книг</h1>
+                <div class="page-header__breadcrumb">
+                    <a href="index.html" class="page-header__breadcrumb-link">Главная</a>
+                    <span>/</span>
+                    <span id="breadcrumb-current">Каталог</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="catalog">
+                    <!-- Sidebar Filters -->
+                    <aside class="catalog__sidebar">
+                        <div class="filter">
+                            <h2 class="filter__title">Фильтры</h2>
+                            
+                            <!-- Genre Filter -->
+                            <div class="filter__section">
+                                <h3 class="filter__section-title">Жанры</h3>
+                                <ul class="filter__list">
+                                    <li class="filter__item">
+                                        <label class="filter__checkbox">
+                                            <input type="checkbox" class="filter__checkbox-input" name="genre" value="fantasy">
+                                            <span class="filter__checkbox-label">Фантастика</span>
+                                        </label>
+                                    </li>
+                                    <li class="filter__item">
+                                        <label class="filter__checkbox">
+                                            <input type="checkbox" class="filter__checkbox-input" name="genre" value="romance">
+                                            <span class="filter__checkbox-label">Романы</span>
+                                        </label>
+                                    </li>
+                                    <li class="filter__item">
+                                        <label class="filter__checkbox">
+                                            <input type="checkbox" class="filter__checkbox-input" name="genre" value="detective">
+                                            <span class="filter__checkbox-label">Детективы</span>
+                                        </label>
+                                    </li>
+                                    <li class="filter__item">
+                                        <label class="filter__checkbox">
+                                            <input type="checkbox" class="filter__checkbox-input" name="genre" value="adventure">
+                                            <span class="filter__checkbox-label">Приключения</span>
+                                        </label>
+                                    </li>
+                                    <li class="filter__item">
+                                        <label class="filter__checkbox">
+                                            <input type="checkbox" class="filter__checkbox-input" name="genre" value="educational">
+                                            <span class="filter__checkbox-label">Учебные материалы</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Price Filter -->
+                            <div class="filter__section">
+                                <h3 class="filter__section-title">Цена</h3>
+                                <div class="filter__price-range">
+                                    <input type="number" class="filter__price-input" id="price-min" placeholder="От" min="0">
+                                    <span>—</span>
+                                    <input type="number" class="filter__price-input" id="price-max" placeholder="До" min="0">
+                                </div>
+                            </div>
+
+                            <!-- Sort -->
+                            <div class="filter__section">
+                                <h3 class="filter__section-title">Сортировка</h3>
+                                <select class="form__select" id="sort-select">
+                                    <option value="title">По названию</option>
+                                    <option value="price-asc">Сначала дешевле</option>
+                                    <option value="price-desc">Сначала дороже</option>
+                                    <option value="newest">Сначала новые</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn--primary btn--block" id="apply-filters">Применить фильтры</button>
+                            <button class="btn btn--outline btn--block mt-20" id="reset-filters">Сбросить</button>
+                        </div>
+                    </aside>
+
+                    <!-- Books Grid -->
+                    <div class="catalog__main">
+                        <div class="mb-20" id="results-info">
+                            <!-- Results count will be shown here -->
+                        </div>
+                        <div class="grid grid--3" id="books-grid">
+                            <!-- Books will be loaded dynamically -->
+                            <div class="loading">
+                                <div class="loading__spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__section">
+                        <h3 class="footer__title">О магазине</h3>
+                        <p class="footer__text">BookStore - ваш надёжный партнёр в мире книг. Мы предлагаем широкий ассортимент литературы по доступным ценам.</p>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Каталог</h3>
+                        <ul class="footer__list">
+                            <li><a href="catalog.html?genre=fantasy" class="footer__link">Фантастика</a></li>
+                            <li><a href="catalog.html?genre=romance" class="footer__link">Романы</a></li>
+                            <li><a href="catalog.html?genre=detective" class="footer__link">Детективы</a></li>
+                            <li><a href="catalog.html?genre=adventure" class="footer__link">Приключения</a></li>
+                            <li><a href="catalog.html?genre=educational" class="footer__link">Учебные материалы</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Покупателям</h3>
+                        <ul class="footer__list">
+                            <li><a href="cart.html" class="footer__link">Корзина</a></li>
+                            <li><a href="register.html" class="footer__link">Регистрация</a></li>
+                            <li><a href="#" class="footer__link">Доставка</a></li>
+                            <li><a href="#" class="footer__link">Оплата</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Контакты</h3>
+                        <p class="footer__text">
+                            Телефон: +7 (800) 123-45-67<br>
+                            Email: info@bookstore.ru<br>
+                            Адрес: г. Москва, ул. Книжная, д. 1
+                        </p>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2024 BookStore. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/models/Book.js"></script>
+    <script src="js/models/User.js"></script>
+    <script src="js/models/Cart.js"></script>
+    <script src="js/models/Order.js"></script>
+    <script src="js/services/ApiService.js"></script>
+    <script src="js/services/StorageService.js"></script>
+    <script src="js/controllers/BaseController.js"></script>
+    <script src="js/controllers/CatalogController.js"></script>
+    <script src="js/controllers/CartController.js"></script>
+    <script src="js/controllers/UserController.js"></script>
+    <script src="js/controllers/OrderController.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            App.init();
+            App.loadCatalogPage();
+        });
+    </script>
+</body>
+</html>

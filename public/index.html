@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BookStore - интернет-магазин книг. Большой выбор книг разных жанров по доступным ценам.">
+    <title>BookStore - Интернет-магазин книг</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-body">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="header__logo">
+                        <span class="header__logo-icon">📚</span>
+                        <span class="header__logo-text">BookStore</span>
+                    </a>
+                    <div class="header__actions">
+                        <a href="cart.html" class="header__cart-link">
+                            <span>Корзина</span>
+                            <span class="header__cart-count" id="cart-count">0</span>
+                        </a>
+                        <a href="register.html" class="header__user-link" id="auth-link">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container">
+                <button class="nav__toggle" id="nav-toggle" aria-label="Меню">☰</button>
+                <ul class="nav__list" id="nav-list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link nav__link--active">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html" class="nav__link">Каталог</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=fantasy" class="nav__link">Фантастика</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=romance" class="nav__link">Романы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=detective" class="nav__link">Детективы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=adventure" class="nav__link">Приключения</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=educational" class="nav__link">Учебные материалы</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Добро пожаловать в BookStore</h1>
+                <p class="hero__subtitle">Огромный выбор книг на любой вкус. От классических романов до современной фантастики. Найдите свою следующую любимую книгу!</p>
+                <div class="hero__actions">
+                    <a href="catalog.html" class="btn btn--secondary btn--large">Перейти в каталог</a>
+                    <a href="register.html" class="btn btn--outline-light btn--large">Регистрация</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- New Arrivals Section -->
+                <section class="section">
+                    <h2 class="section__title">Новинки</h2>
+                    <p class="section__subtitle">Последние поступления в нашем магазине</p>
+                    <div class="grid grid--4" id="new-arrivals">
+                        <!-- Books will be loaded dynamically -->
+                        <div class="loading">
+                            <div class="loading__spinner"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Popular Books Section -->
+                <section class="section">
+                    <h2 class="section__title">Популярные книги</h2>
+                    <p class="section__subtitle">Бестселлеры, которые выбирают наши читатели</p>
+                    <div class="grid grid--4" id="popular-books">
+                        <!-- Books will be loaded dynamically -->
+                        <div class="loading">
+                            <div class="loading__spinner"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Genres Section -->
+                <section class="section">
+                    <h2 class="section__title">Жанры</h2>
+                    <p class="section__subtitle">Выберите интересующий вас жанр</p>
+                    <div class="grid grid--3">
+                        <a href="catalog.html?genre=fantasy" class="card">
+                            <div class="card__body">
+                                <h3 class="card__title">Фантастика</h3>
+                                <p class="card__author">Миры будущего и невероятные приключения</p>
+                            </div>
+                        </a>
+                        <a href="catalog.html?genre=romance" class="card">
+                            <div class="card__body">
+                                <h3 class="card__title">Романы</h3>
+                                <p class="card__author">Истории о любви и человеческих отношениях</p>
+                            </div>
+                        </a>
+                        <a href="catalog.html?genre=detective" class="card">
+                            <div class="card__body">
+                                <h3 class="card__title">Детективы</h3>
+                                <p class="card__author">Загадки, расследования и интриги</p>
+                            </div>
+                        </a>
+                        <a href="catalog.html?genre=adventure" class="card">
+                            <div class="card__body">
+                                <h3 class="card__title">Приключения</h3>
+                                <p class="card__author">Захватывающие путешествия и открытия</p>
+                            </div>
+                        </a>
+                        <a href="catalog.html?genre=educational" class="card">
+                            <div class="card__body">
+                                <h3 class="card__title">Учебные материалы</h3>
+                                <p class="card__author">Книги для обучения и саморазвития</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__section">
+                        <h3 class="footer__title">О магазине</h3>
+                        <p class="footer__text">BookStore - ваш надёжный партнёр в мире книг. Мы предлагаем широкий ассортимент литературы по доступным ценам.</p>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Каталог</h3>
+                        <ul class="footer__list">
+                            <li><a href="catalog.html?genre=fantasy" class="footer__link">Фантастика</a></li>
+                            <li><a href="catalog.html?genre=romance" class="footer__link">Романы</a></li>
+                            <li><a href="catalog.html?genre=detective" class="footer__link">Детективы</a></li>
+                            <li><a href="catalog.html?genre=adventure" class="footer__link">Приключения</a></li>
+                            <li><a href="catalog.html?genre=educational" class="footer__link">Учебные материалы</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Покупателям</h3>
+                        <ul class="footer__list">
+                            <li><a href="cart.html" class="footer__link">Корзина</a></li>
+                            <li><a href="register.html" class="footer__link">Регистрация</a></li>
+                            <li><a href="#" class="footer__link">Доставка</a></li>
+                            <li><a href="#" class="footer__link">Оплата</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Контакты</h3>
+                        <p class="footer__text">
+                            Телефон: +7 (800) 123-45-67<br>
+                            Email: info@bookstore.ru<br>
+                            Адрес: г. Москва, ул. Книжная, д. 1
+                        </p>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2024 BookStore. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/models/Book.js"></script>
+    <script src="js/models/User.js"></script>
+    <script src="js/models/Cart.js"></script>
+    <script src="js/models/Order.js"></script>
+    <script src="js/services/ApiService.js"></script>
+    <script src="js/services/StorageService.js"></script>
+    <script src="js/controllers/BaseController.js"></script>
+    <script src="js/controllers/CatalogController.js"></script>
+    <script src="js/controllers/CartController.js"></script>
+    <script src="js/controllers/UserController.js"></script>
+    <script src="js/controllers/OrderController.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            App.init();
+            App.loadHomePage();
+        });
+    </script>
+</body>
+</html>

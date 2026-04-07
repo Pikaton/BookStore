@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Оформление заказа - BookStore">
+    <title>Оформление заказа - BookStore</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-body">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="header__logo">
+                        <span class="header__logo-icon">📚</span>
+                        <span class="header__logo-text">BookStore</span>
+                    </a>
+                    <div class="header__actions">
+                        <a href="cart.html" class="header__cart-link">
+                            <span>Корзина</span>
+                            <span class="header__cart-count" id="cart-count">0</span>
+                        </a>
+                        <a href="register.html" class="header__user-link" id="auth-link">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container">
+                <button class="nav__toggle" id="nav-toggle" aria-label="Меню">☰</button>
+                <ul class="nav__list" id="nav-list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html" class="nav__link">Каталог</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=fantasy" class="nav__link">Фантастика</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=romance" class="nav__link">Романы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=detective" class="nav__link">Детективы</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=adventure" class="nav__link">Приключения</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="catalog.html?genre=educational" class="nav__link">Учебные материалы</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-header__title">Оформление заказа</h1>
+                <div class="page-header__breadcrumb">
+                    <a href="index.html" class="page-header__breadcrumb-link">Главная</a>
+                    <span>/</span>
+                    <a href="cart.html" class="page-header__breadcrumb-link">Корзина</a>
+                    <span>/</span>
+                    <span>Оформление заказа</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Alert Messages -->
+                <div id="checkout-alerts"></div>
+
+                <div class="checkout">
+                    <!-- Checkout Form -->
+                    <div class="checkout__form">
+                        <form id="checkout-form" class="form form--wide">
+                            <!-- Contact Information -->
+                            <div class="checkout-section">
+                                <h2 class="checkout-section__title">Контактные данные</h2>
+                                <div class="form__row">
+                                    <div class="form__group">
+                                        <label class="form__label" for="first-name">Имя *</label>
+                                        <input type="text" class="form__input" id="first-name" name="firstName" required>
+                                        <span class="form__error hidden" id="first-name-error"></span>
+                                    </div>
+                                    <div class="form__group">
+                                        <label class="form__label" for="last-name">Фамилия *</label>
+                                        <input type="text" class="form__input" id="last-name" name="lastName" required>
+                                        <span class="form__error hidden" id="last-name-error"></span>
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__group">
+                                        <label class="form__label" for="email">Email *</label>
+                                        <input type="email" class="form__input" id="email" name="email" required>
+                                        <span class="form__error hidden" id="email-error"></span>
+                                    </div>
+                                    <div class="form__group">
+                                        <label class="form__label" for="phone">Телефон *</label>
+                                        <input type="tel" class="form__input" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                                        <span class="form__error hidden" id="phone-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Information -->
+                            <div class="checkout-section">
+                                <h2 class="checkout-section__title">Доставка</h2>
+                                <div class="form__group">
+                                    <label class="form__label" for="delivery-method">Способ доставки *</label>
+                                    <select class="form__select" id="delivery-method" name="deliveryMethod" required>
+                                        <option value="">Выберите способ доставки</option>
+                                        <option value="courier">Курьер (300 руб.)</option>
+                                        <option value="pickup">Самовывоз (бесплатно)</option>
+                                        <option value="post">Почта России (250 руб.)</option>
+                                    </select>
+                                </div>
+                                <div class="form__group">
+                                    <label class="form__label" for="city">Город *</label>
+                                    <input type="text" class="form__input" id="city" name="city" required>
+                                    <span class="form__error hidden" id="city-error"></span>
+                                </div>
+                                <div class="form__group" id="address-group">
+                                    <label class="form__label" for="address">Адрес доставки *</label>
+                                    <input type="text" class="form__input" id="address" name="address" placeholder="Улица, дом, квартира">
+                                    <span class="form__error hidden" id="address-error"></span>
+                                </div>
+                                <div class="form__group">
+                                    <label class="form__label" for="comment">Комментарий к заказу</label>
+                                    <textarea class="form__textarea" id="comment" name="comment" placeholder="Дополнительная информация по заказу"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Payment Information -->
+                            <div class="checkout-section">
+                                <h2 class="checkout-section__title">Оплата</h2>
+                                <div class="form__group">
+                                    <label class="form__label" for="payment-method">Способ оплаты *</label>
+                                    <select class="form__select" id="payment-method" name="paymentMethod" required>
+                                        <option value="">Выберите способ оплаты</option>
+                                        <option value="card">Банковская карта</option>
+                                        <option value="cash">Наличными при получении</option>
+                                        <option value="sbp">СБП</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn--secondary btn--large btn--block" id="submit-order">
+                                Подтвердить заказ
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <aside class="checkout__summary">
+                        <div class="summary">
+                            <h2 class="summary__title">Ваш заказ</h2>
+                            <div id="order-items">
+                                <!-- Items will be loaded dynamically -->
+                            </div>
+                            <div class="summary__row summary__row--total" style="margin-top: 20px;">
+                                <span>Товары</span>
+                                <span class="summary__value" id="checkout-subtotal">0 руб.</span>
+                            </div>
+                            <div class="summary__row">
+                                <span>Доставка</span>
+                                <span class="summary__value" id="checkout-delivery">0 руб.</span>
+                            </div>
+                            <div class="summary__row summary__row--total">
+                                <span>Итого</span>
+                                <span class="summary__value" id="checkout-total">0 руб.</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__section">
+                        <h3 class="footer__title">О магазине</h3>
+                        <p class="footer__text">BookStore - ваш надёжный партнёр в мире книг. Мы предлагаем широкий ассортимент литературы по доступным ценам.</p>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Каталог</h3>
+                        <ul class="footer__list">
+                            <li><a href="catalog.html?genre=fantasy" class="footer__link">Фантастика</a></li>
+                            <li><a href="catalog.html?genre=romance" class="footer__link">Романы</a></li>
+                            <li><a href="catalog.html?genre=detective" class="footer__link">Детективы</a></li>
+                            <li><a href="catalog.html?genre=adventure" class="footer__link">Приключения</a></li>
+                            <li><a href="catalog.html?genre=educational" class="footer__link">Учебные материалы</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Покупателям</h3>
+                        <ul class="footer__list">
+                            <li><a href="cart.html" class="footer__link">Корзина</a></li>
+                            <li><a href="register.html" class="footer__link">Регистрация</a></li>
+                            <li><a href="#" class="footer__link">Доставка</a></li>
+                            <li><a href="#" class="footer__link">Оплата</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h3 class="footer__title">Контакты</h3>
+                        <p class="footer__text">
+                            Телефон: +7 (800) 123-45-67<br>
+                            Email: info@bookstore.ru<br>
+                            Адрес: г. Москва, ул. Книжная, д. 1
+                        </p>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2024 BookStore. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title">Заказ оформлен!</h3>
+                <button class="modal__close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal__body">
+                <p>Ваш заказ <strong id="order-number"></strong> успешно оформлен.</p>
+                <p>Мы отправили подтверждение на вашу электронную почту.</p>
+                <p>Ожидайте звонка от нашего менеджера для подтверждения заказа.</p>
+            </div>
+            <div class="modal__footer">
+                <a href="index.html" class="btn btn--primary">На главную</a>
+                <a href="catalog.html" class="btn btn--outline">Продолжить покупки</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/models/Book.js"></script>
+    <script src="js/models/User.js"></script>
+    <script src="js/models/Cart.js"></script>
+    <script src="js/models/Order.js"></script>
+    <script src="js/services/ApiService.js"></script>
+    <script src="js/services/StorageService.js"></script>
+    <script src="js/controllers/BaseController.js"></script>
+    <script src="js/controllers/CatalogController.js"></script>
+    <script src="js/controllers/CartController.js"></script>
+    <script src="js/controllers/UserController.js"></script>
+    <script src="js/controllers/OrderController.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            App.init();
+            App.loadCheckoutPage();
+        });
+    </script>
+</body>
+</html>

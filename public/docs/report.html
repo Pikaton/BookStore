@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчёт о разработке интернет-магазина BookStore</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14pt;
+            line-height: 1.5;
+            color: #000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        h2 {
+            font-size: 16pt;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            font-size: 14pt;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        p {
+            text-align: justify;
+            text-indent: 1.25cm;
+            margin-bottom: 10px;
+        }
+        
+        ul, ol {
+            margin-left: 1.25cm;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12pt;
+        }
+        
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12pt;
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11pt;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 15px 0;
+        }
+        
+        .diagram-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .toc {
+            margin: 20px 0 40px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>ОТЧЁТ<br>о разработке интернет-магазина книг "BookStore"</h1>
+    
+    <div class="toc">
+        <h2>Содержание</h2>
+        <ul>
+            <li>1. Описание страниц приложения</li>
+            <li>2. Классы бизнес-логики с полями и описанием</li>
+            <li>3. Диаграмма классов</li>
+            <li>4. Классы-контроллеры клиентской части</li>
+            <li>5. JS код взаимодействия с сервером (AJAX)</li>
+            <li>6. CSS для адаптивной вёрстки</li>
+        </ul>
+    </div>
+
+    <h2>1. Описание страниц приложения</h2>
+    
+    <p>Веб-приложение "BookStore" состоит из следующих страниц:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Страница</th>
+                <th>Файл</th>
+                <th>Назначение</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Главная страница</strong></td>
+                <td>index.html</td>
+                <td>Входная точка приложения. Содержит hero-секцию с приветствием, блоки новинок и популярных книг, а также навигацию по жанрам. Привлекает пользователя и направляет его в каталог.</td>
+            </tr>
+            <tr>
+                <td><strong>Каталог</strong></td>
+                <td>catalog.html</td>
+                <td>Основная страница магазина. Содержит сетку товаров (книг) с возможностью фильтрации по жанрам: фантастика, романы, детективы, приключения, учебные материалы. Включает боковую панель фильтров и фильтрацию по цене.</td>
+            </tr>
+            <tr>
+                <td><strong>Корзина</strong></td>
+                <td>cart.html</td>
+                <td>Страница управления корзиной. Отображает добавленные товары с возможностью изменения количества и удаления. Показывает итоговую сумму заказа и кнопку перехода к оформлению.</td>
+            </tr>
+            <tr>
+                <td><strong>Оформление заказа</strong></td>
+                <td>checkout.html</td>
+                <td>Страница оформления заказа. Содержит форму ввода контактных данных (ФИО, телефон, email), адреса доставки, выбора способа доставки и оплаты. Показывает сводку заказа.</td>
+            </tr>
+            <tr>
+                <td><strong>Регистрация</strong></td>
+                <td>register.html</td>
+                <td>Страница регистрации нового пользователя. Форма содержит поля: имя, email, пароль, подтверждение пароля. Включает валидацию данных.</td>
+            </tr>
+            <tr>
+                <td><strong>Вход</strong></td>
+                <td>login.html</td>
+                <td>Страница авторизации пользователя. Форма с полями email и пароль для входа в личный кабинет.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p>Каждая страница содержит общие элементы:</p>
+    <ul>
+        <li><strong>Шапка (header)</strong> — логотип, ссылка на корзину с счётчиком товаров, ссылка на вход/регистрацию</li>
+        <li><strong>Навигация (nav)</strong> — меню с ссылками на главную, каталог и жанры книг</li>
+        <li><strong>Основной контент (main)</strong> — уникальное содержимое страницы</li>
+        <li><strong>Подвал (footer)</strong> — информация о магазине, ссылки на разделы, контакты</li>
+    </ul>
+
+    <div class="page-break"></div>
+    
+    <h2>2. Классы бизнес-логики с полями и описанием</h2>
+    
+    <h3>2.1. Класс Book (Книга)</h3>
+    <p>Модель книги — основного товара магазина.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Поле</th>
+                <th>Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>id</td><td>string</td><td>Уникальный идентификатор книги</td></tr>
+            <tr><td>title</td><td>string</td><td>Название книги</td></tr>
+            <tr><td>author</td><td>string</td><td>Автор книги</td></tr>
+            <tr><td>genre</td><td>Genre</td><td>Жанр (fantasy, romance, detective, adventure, educational)</td></tr>
+            <tr><td>price</td><td>number</td><td>Цена в рублях</td></tr>
+            <tr><td>description</td><td>string</td><td>Описание книги</td></tr>
+            <tr><td>imageUrl</td><td>string</td><td>URL изображения обложки</td></tr>
+            <tr><td>isbn</td><td>string</td><td>Международный стандартный книжный номер</td></tr>
+            <tr><td>publisher</td><td>string</td><td>Издательство</td></tr>
+            <tr><td>year</td><td>number</td><td>Год издания</td></tr>
+            <tr><td>pages</td><td>number</td><td>Количество страниц</td></tr>
+            <tr><td>inStock</td><td>boolean</td><td>Наличие на складе</td></tr>
+            <tr><td>quantity</td><td>number</td><td>Количество на складе</td></tr>
+            <tr><td>rating</td><td>number</td><td>Рейтинг (0-5)</td></tr>
+            <tr><td>createdAt</td><td>Date</td><td>Дата добавления в каталог</td></tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Методы класса Book:</strong></p>
+    <ul>
+        <li><code>validate()</code> — проверка корректности данных книги</li>
+        <li><code>getFormattedPrice()</code> — форматирование цены с символом валюты</li>
+        <li><code>getGenreLabel()</code> — получение русского названия жанра</li>
+        <li><code>isAvailable()</code> — проверка доступности для заказа</li>
+        <li><code>toJSON()</code> — сериализация в JSON</li>
+        <li><code>static fromJSON(data)</code> — десериализация из JSON</li>
+    </ul>
+
+    <h3>2.2. Класс User (Пользователь)</h3>
+    <p>Модель пользователя системы.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Поле</th>
+                <th>Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>id</td><td>string</td><td>Уникальный идентификатор пользователя</td></tr>
+            <tr><td>email</td><td>string</td><td>Email (используется для входа)</td></tr>
+            <tr><td>password</td><td>string</td><td>Хэш пароля</td></tr>
+            <tr><td>firstName</td><td>string</td><td>Имя</td></tr>
+            <tr><td>lastName</td><td>string</td><td>Фамилия</td></tr>
+            <tr><td>phone</td><td>string</td><td>Номер телефона</td></tr>
+            <tr><td>address</td><td>Address</td><td>Адрес доставки (объект)</td></tr>
+            <tr><td>createdAt</td><td>Date</td><td>Дата регистрации</td></tr>
+            <tr><td>updatedAt</td><td>Date</td><td>Дата последнего обновления</td></tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Вложенный объект Address:</strong></p>
+    <ul>
+        <li><code>city</code> — город</li>
+        <li><code>street</code> — улица</li>
+        <li><code>building</code> — дом</li>
+        <li><code>apartment</code> — квартира</li>
+        <li><code>zipCode</code> — почтовый индекс</li>
+    </ul>
+    
+    <p><strong>Методы класса User:</strong></p>
+    <ul>
+        <li><code>validate()</code> — валидация данных пользователя</li>
+        <li><code>validateEmail()</code> — проверка формата email</li>
+        <li><code>validatePassword()</code> — проверка надёжности пароля</li>
+        <li><code>getFullName()</code> — получение полного имени</li>
+        <li><code>getFullAddress()</code> — форматированный адрес</li>
+        <li><code>toJSON()</code> — сериализация (без пароля)</li>
+        <li><code>static fromJSON(data)</code> — десериализация</li>
+    </ul>
+
+    <h3>2.3. Класс Cart (Корзина)</h3>
+    <p>Модель корзины покупок.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Поле</th>
+                <th>Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>id</td><td>string</td><td>Уникальный идентификатор корзины</td></tr>
+            <tr><td>userId</td><td>string|null</td><td>ID пользователя (null для гостей)</td></tr>
+            <tr><td>items</td><td>CartItem[]</td><td>Массив товаров в корзине</td></tr>
+            <tr><td>createdAt</td><td>Date</td><td>Дата создания</td></tr>
+            <tr><td>updatedAt</td><td>Date</td><td>Дата обновления</td></tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Вложенный объект CartItem:</strong></p>
+    <ul>
+        <li><code>bookId</code> — ID книги</li>
+        <li><code>book</code> — объект Book</li>
+        <li><code>quantity</code> — количество</li>
+        <li><code>addedAt</code> — дата добавления</li>
+    </ul>
+    
+    <p><strong>Методы класса Cart:</strong></p>
+    <ul>
+        <li><code>addItem(book, quantity)</code> — добавление товара</li>
+        <li><code>removeItem(bookId)</code> — удаление товара</li>
+        <li><code>updateQuantity(bookId, quantity)</code> — изменение количества</li>
+        <li><code>clear()</code> — очистка корзины</li>
+        <li><code>getItemCount()</code> — общее количество товаров</li>
+        <li><code>getSubtotal()</code> — сумма без доставки</li>
+        <li><code>getShippingCost()</code> — стоимость доставки</li>
+        <li><code>getTotal()</code> — итоговая сумма</li>
+        <li><code>isEmpty()</code> — проверка на пустоту</li>
+        <li><code>findItem(bookId)</code> — поиск товара по ID</li>
+    </ul>
+
+    <h3>2.4. Класс Order (Заказ)</h3>
+    <p>Модель заказа.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Поле</th>
+                <th>Тип</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>id</td><td>string</td><td>Уникальный идентификатор заказа</td></tr>
+            <tr><td>orderNumber</td><td>string</td><td>Номер заказа (для пользователя)</td></tr>
+            <tr><td>userId</td><td>string|null</td><td>ID пользователя</td></tr>
+            <tr><td>items</td><td>OrderItem[]</td><td>Товары в заказе</td></tr>
+            <tr><td>status</td><td>OrderStatus</td><td>Статус заказа</td></tr>
+            <tr><td>subtotal</td><td>number</td><td>Сумма товаров</td></tr>
+            <tr><td>shippingCost</td><td>number</td><td>Стоимость доставки</td></tr>
+            <tr><td>total</td><td>number</td><td>Итоговая сумма</td></tr>
+            <tr><td>shippingAddress</td><td>ShippingAddress</td><td>Адрес доставки</td></tr>
+            <tr><td>contactInfo</td><td>ContactInfo</td><td>Контактные данные</td></tr>
+            <tr><td>paymentMethod</td><td>string</td><td>Способ оплаты</td></tr>
+            <tr><td>shippingMethod</td><td>string</td><td>Способ доставки</td></tr>
+            <tr><td>notes</td><td>string</td><td>Комментарий к заказу</td></tr>
+            <tr><td>createdAt</td><td>Date</td><td>Дата создания</td></tr>
+            <tr><td>updatedAt</td><td>Date</td><td>Дата обновления</td></tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Статусы заказа (OrderStatus):</strong></p>
+    <ul>
+        <li><code>pending</code> — ожидает обработки</li>
+        <li><code>confirmed</code> — подтверждён</li>
+        <li><code>processing</code> — в обработке</li>
+        <li><code>shipped</code> — отправлен</li>
+        <li><code>delivered</code> — доставлен</li>
+        <li><code>cancelled</code> — отменён</li>
+    </ul>
+    
+    <p><strong>Методы класса Order:</strong></p>
+    <ul>
+        <li><code>validate()</code> — валидация заказа</li>
+        <li><code>calculateTotals()</code> — пересчёт сумм</li>
+        <li><code>updateStatus(status)</code> — обновление статуса</li>
+        <li><code>getStatusLabel()</code> — русское название статуса</li>
+        <li><code>canBeCancelled()</code> — возможность отмены</li>
+        <li><code>static createFromCart(cart, data)</code> — создание из корзины</li>
+        <li><code>static generateOrderNumber()</code> — генерация номера</li>
+    </ul>
+
+    <div class="page-break"></div>
+    
+    <h2>3. Диаграмма классов</h2>
+    
+    <p>Ниже представлена UML диаграмма классов, отображающая структуру моделей и их взаимосвязи:</p>
+    
+    <div class="diagram-container">
+        <svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" style="font-family: Arial, sans-serif;">
+            <!-- Background -->
+            <rect width="1200" height="900" fill="#ffffff"/>
+            
+            <!-- Book Class -->
+            <g transform="translate(50, 50)">
+                <rect width="280" height="380" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="5"/>
+                <rect width="280" height="35" fill="#1976d2" rx="5" ry="0"/>
+                <rect x="0" y="0" width="280" height="35" fill="#1976d2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L275,0 Q280,0 280,5 L280,35 L0,35 Z" fill="#1976d2"/>
+                <text x="140" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">Book</text>
+                
+                <line x1="0" y1="190" x2="280" y2="190" stroke="#1976d2" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- id: string</text>
+                <text x="10" y="72" font-size="12">- title: string</text>
+                <text x="10" y="89" font-size="12">- author: string</text>
+                <text x="10" y="106" font-size="12">- genre: Genre</text>
+                <text x="10" y="123" font-size="12">- price: number</text>
+                <text x="10" y="140" font-size="12">- description: string</text>
+                <text x="10" y="157" font-size="12">- imageUrl: string</text>
+                <text x="10" y="174" font-size="12">- inStock: boolean</text>
+                
+                <text x="10" y="210" font-size="12">+ validate(): ValidationResult</text>
+                <text x="10" y="227" font-size="12">+ getFormattedPrice(): string</text>
+                <text x="10" y="244" font-size="12">+ getGenreLabel(): string</text>
+                <text x="10" y="261" font-size="12">+ isAvailable(): boolean</text>
+                <text x="10" y="278" font-size="12">+ toJSON(): object</text>
+                <text x="10" y="295" font-size="12">+ static fromJSON(data): Book</text>
+            </g>
+            
+            <!-- User Class -->
+            <g transform="translate(460, 50)">
+                <rect width="280" height="340" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L275,0 Q280,0 280,5 L280,35 L0,35 Z" fill="#388e3c"/>
+                <text x="140" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">User</text>
+                
+                <line x1="0" y1="170" x2="280" y2="170" stroke="#388e3c" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- id: string</text>
+                <text x="10" y="72" font-size="12">- email: string</text>
+                <text x="10" y="89" font-size="12">- password: string</text>
+                <text x="10" y="106" font-size="12">- firstName: string</text>
+                <text x="10" y="123" font-size="12">- lastName: string</text>
+                <text x="10" y="140" font-size="12">- phone: string</text>
+                <text x="10" y="157" font-size="12">- address: Address</text>
+                
+                <text x="10" y="190" font-size="12">+ validate(): ValidationResult</text>
+                <text x="10" y="207" font-size="12">+ validateEmail(): boolean</text>
+                <text x="10" y="224" font-size="12">+ validatePassword(): object</text>
+                <text x="10" y="241" font-size="12">+ getFullName(): string</text>
+                <text x="10" y="258" font-size="12">+ getFullAddress(): string</text>
+                <text x="10" y="275" font-size="12">+ toJSON(): object</text>
+            </g>
+            
+            <!-- Cart Class -->
+            <g transform="translate(50, 480)">
+                <rect width="280" height="320" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L275,0 Q280,0 280,5 L280,35 L0,35 Z" fill="#f57c00"/>
+                <text x="140" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">Cart</text>
+                
+                <line x1="0" y1="120" x2="280" y2="120" stroke="#f57c00" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- id: string</text>
+                <text x="10" y="72" font-size="12">- userId: string | null</text>
+                <text x="10" y="89" font-size="12">- items: CartItem[]</text>
+                <text x="10" y="106" font-size="12">- updatedAt: Date</text>
+                
+                <text x="10" y="140" font-size="12">+ addItem(book, qty): void</text>
+                <text x="10" y="157" font-size="12">+ removeItem(bookId): void</text>
+                <text x="10" y="174" font-size="12">+ updateQuantity(id, qty): void</text>
+                <text x="10" y="191" font-size="12">+ clear(): void</text>
+                <text x="10" y="208" font-size="12">+ getItemCount(): number</text>
+                <text x="10" y="225" font-size="12">+ getSubtotal(): number</text>
+                <text x="10" y="242" font-size="12">+ getTotal(): number</text>
+                <text x="10" y="259" font-size="12">+ isEmpty(): boolean</text>
+            </g>
+            
+            <!-- Order Class -->
+            <g transform="translate(460, 440)">
+                <rect width="280" height="400" fill="#fce4ec" stroke="#c2185b" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L275,0 Q280,0 280,5 L280,35 L0,35 Z" fill="#c2185b"/>
+                <text x="140" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">Order</text>
+                
+                <line x1="0" y1="200" x2="280" y2="200" stroke="#c2185b" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- id: string</text>
+                <text x="10" y="72" font-size="12">- orderNumber: string</text>
+                <text x="10" y="89" font-size="12">- userId: string | null</text>
+                <text x="10" y="106" font-size="12">- items: OrderItem[]</text>
+                <text x="10" y="123" font-size="12">- status: OrderStatus</text>
+                <text x="10" y="140" font-size="12">- subtotal: number</text>
+                <text x="10" y="157" font-size="12">- shippingCost: number</text>
+                <text x="10" y="174" font-size="12">- total: number</text>
+                <text x="10" y="191" font-size="12">- shippingAddress: Address</text>
+                
+                <text x="10" y="220" font-size="12">+ validate(): ValidationResult</text>
+                <text x="10" y="237" font-size="12">+ calculateTotals(): void</text>
+                <text x="10" y="254" font-size="12">+ updateStatus(status): void</text>
+                <text x="10" y="271" font-size="12">+ getStatusLabel(): string</text>
+                <text x="10" y="288" font-size="12">+ canBeCancelled(): boolean</text>
+                <text x="10" y="305" font-size="12">+ static createFromCart(): Order</text>
+            </g>
+            
+            <!-- CartItem Class -->
+            <g transform="translate(870, 50)">
+                <rect width="250" height="150" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L245,0 Q250,0 250,5 L250,35 L0,35 Z" fill="#7b1fa2"/>
+                <text x="125" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">CartItem</text>
+                
+                <line x1="0" y1="100" x2="250" y2="100" stroke="#7b1fa2" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- bookId: string</text>
+                <text x="10" y="72" font-size="12">- book: Book</text>
+                <text x="10" y="89" font-size="12">- quantity: number</text>
+                
+                <text x="10" y="120" font-size="12">+ getSubtotal(): number</text>
+            </g>
+            
+            <!-- Address Class -->
+            <g transform="translate(870, 240)">
+                <rect width="250" height="170" fill="#e0f7fa" stroke="#0097a7" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L245,0 Q250,0 250,5 L250,35 L0,35 Z" fill="#0097a7"/>
+                <text x="125" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">Address</text>
+                
+                <line x1="0" y1="130" x2="250" y2="130" stroke="#0097a7" stroke-width="1"/>
+                
+                <text x="10" y="55" font-size="12">- city: string</text>
+                <text x="10" y="72" font-size="12">- street: string</text>
+                <text x="10" y="89" font-size="12">- building: string</text>
+                <text x="10" y="106" font-size="12">- apartment: string</text>
+                <text x="10" y="123" font-size="12">- zipCode: string</text>
+                
+                <text x="10" y="150" font-size="12">+ toString(): string</text>
+            </g>
+            
+            <!-- Genre Enum -->
+            <g transform="translate(870, 450)">
+                <rect width="250" height="160" fill="#fff9c4" stroke="#fbc02d" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L245,0 Q250,0 250,5 L250,35 L0,35 Z" fill="#fbc02d"/>
+                <text x="125" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="16">«enumeration» Genre</text>
+                
+                <text x="10" y="55" font-size="12">FANTASY = "fantasy"</text>
+                <text x="10" y="72" font-size="12">ROMANCE = "romance"</text>
+                <text x="10" y="89" font-size="12">DETECTIVE = "detective"</text>
+                <text x="10" y="106" font-size="12">ADVENTURE = "adventure"</text>
+                <text x="10" y="123" font-size="12">EDUCATIONAL = "educational"</text>
+            </g>
+            
+            <!-- OrderStatus Enum -->
+            <g transform="translate(870, 650)">
+                <rect width="250" height="180" fill="#ffebee" stroke="#d32f2f" stroke-width="2" rx="5"/>
+                <path d="M0,30 L0,5 Q0,0 5,0 L245,0 Q250,0 250,5 L250,35 L0,35 Z" fill="#d32f2f"/>
+                <text x="125" y="24" text-anchor="middle" fill="white" font-weight="bold" font-size="14">«enumeration» OrderStatus</text>
+                
+                <text x="10" y="55" font-size="12">PENDING = "pending"</text>
+                <text x="10" y="72" font-size="12">CONFIRMED = "confirmed"</text>
+                <text x="10" y="89" font-size="12">PROCESSING = "processing"</text>
+                <text x="10" y="106" font-size="12">SHIPPED = "shipped"</text>
+                <text x="10" y="123" font-size="12">DELIVERED = "delivered"</text>
+                <text x="10" y="140" font-size="12">CANCELLED = "cancelled"</text>
+            </g>
+            
+            <!-- Relationships -->
+            <!-- Cart contains CartItem -->
+            <line x1="330" y1="560" x2="870" y2="125" stroke="#333" stroke-width="1.5"/>
+            <polygon points="870,125 860,132 860,118" fill="#333"/>
+            <text x="550" y="320" font-size="11" fill="#666">contains *</text>
+            
+            <!-- CartItem references Book -->
+            <line x1="870" y1="100" x2="330" y2="200" stroke="#333" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <polygon points="330,200 342,196 338,208" fill="#333"/>
+            <text x="550" y="140" font-size="11" fill="#666">references 1</text>
+            
+            <!-- User has Address -->
+            <line x1="740" y1="200" x2="870" y2="300" stroke="#333" stroke-width="1.5"/>
+            <polygon points="870,300 858,298 862,310" fill="#333"/>
+            <text x="790" y="240" font-size="11" fill="#666">has 1</text>
+            
+            <!-- Order has Address -->
+            <line x1="740" y1="550" x2="870" y2="370" stroke="#333" stroke-width="1.5"/>
+            <polygon points="870,370 858,372 862,360" fill="#333"/>
+            
+            <!-- Book uses Genre -->
+            <line x1="330" y1="150" x2="870" y2="500" stroke="#333" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <polygon points="870,500 858,502 862,490" fill="#333"/>
+            
+            <!-- Order uses OrderStatus -->
+            <line x1="740" y1="700" x2="870" y2="720" stroke="#333" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <polygon points="870,720 858,718 860,730" fill="#333"/>
+            
+            <!-- Order created from Cart -->
+            <line x1="330" y1="640" x2="460" y2="640" stroke="#333" stroke-width="1.5" stroke-dasharray="8,4"/>
+            <text x="370" y="630" font-size="11" fill="#666">creates</text>
+        </svg>
+    </div>
+    
+    <p><strong>Легенда диаграммы:</strong></p>
+    <ul>
+        <li>Сплошная линия со стрелкой — ассоциация (содержит, имеет)</li>
+        <li>Пунктирная линия — зависимость (использует, ссылается)</li>
+        <li>Знаки + и - обозначают public и private модификаторы доступа</li>
+    </ul>
+
+    <div class="page-break"></div>
+    
+    <h2>4. Классы-контроллеры клиентской части приложения</h2>
+    
+    <p>Контроллеры построены по принципу "тонкого контроллера" — они содержат минимум логики и делегируют обработку данных моделям и сервисам.</p>
+    
+    <h3>4.1. BaseController</h3>
+    <p>Базовый класс для всех контроллеров. Предоставляет общие методы.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>constructor(apiService, storageService)</code></td><td>Инициализация с сервисами</td></tr>
+            <tr><td><code>showLoading(container)</code></td><td>Отображение индикатора загрузки</td></tr>
+            <tr><td><code>hideLoading(container)</code></td><td>Скрытие индикатора загрузки</td></tr>
+            <tr><td><code>showError(container, message)</code></td><td>Отображение сообщения об ошибке</td></tr>
+            <tr><td><code>showSuccess(container, message)</code></td><td>Отображение сообщения об успехе</td></tr>
+            <tr><td><code>clearMessages(container)</code></td><td>Очистка сообщений</td></tr>
+            <tr><td><code>validateForm(form)</code></td><td>Базовая валидация формы</td></tr>
+            <tr><td><code>getFormData(form)</code></td><td>Получение данных формы</td></tr>
+            <tr><td><code>bindEvent(element, event, handler)</code></td><td>Привязка обработчика события</td></tr>
+            <tr><td><code>render(container, html)</code></td><td>Рендеринг HTML в контейнер</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>4.2. CatalogController</h3>
+    <p>Управляет отображением каталога книг и фильтрацией.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>init()</code></td><td>Инициализация контроллера</td></tr>
+            <tr><td><code>loadBooks(filters)</code></td><td>Загрузка книг с фильтрами</td></tr>
+            <tr><td><code>renderBooks(books)</code></td><td>Рендеринг списка книг</td></tr>
+            <tr><td><code>renderBookCard(book)</code></td><td>Рендеринг карточки книги</td></tr>
+            <tr><td><code>handleFilterChange(event)</code></td><td>Обработка изменения фильтра</td></tr>
+            <tr><td><code>handleAddToCart(bookId)</code></td><td>Делегирование добавления в корзину</td></tr>
+            <tr><td><code>applyFilters()</code></td><td>Применение выбранных фильтров</td></tr>
+            <tr><td><code>getActiveFilters()</code></td><td>Получение активных фильтров</td></tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Пример минимальной логики в контроллере:</strong></p>
+    <pre>
+handleAddToCart(bookId) {
+    // Контроллер только делегирует — не содержит логики обработки
+    this.cartController.addToCart(bookId);
+}
+
+handleFilterChange(event) {
+    // Только сбор данных и вызов метода загрузки
+    const filters = this.getActiveFilters();
+    this.loadBooks(filters);
+}</pre>
+    
+    <h3>4.3. CartController</h3>
+    <p>Управляет корзиной покупок.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>init()</code></td><td>Инициализация и загрузка корзины</td></tr>
+            <tr><td><code>addToCart(bookId)</code></td><td>Делегирование добавления товара модели Cart</td></tr>
+            <tr><td><code>removeFromCart(bookId)</code></td><td>Делегирование удаления товара</td></tr>
+            <tr><td><code>updateQuantity(bookId, quantity)</code></td><td>Делегирование обновления количества</td></tr>
+            <tr><td><code>renderCart()</code></td><td>Рендеринг содержимого корзины</td></tr>
+            <tr><td><code>renderCartItem(item)</code></td><td>Рендеринг одного товара</td></tr>
+            <tr><td><code>updateCartCounter()</code></td><td>Обновление счётчика в шапке</td></tr>
+            <tr><td><code>handleCheckout()</code></td><td>Переход к оформлению заказа</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>4.4. UserController</h3>
+    <p>Управляет регистрацией и авторизацией.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>init()</code></td><td>Инициализация контроллера</td></tr>
+            <tr><td><code>handleRegister(formData)</code></td><td>Обработка регистрации</td></tr>
+            <tr><td><code>handleLogin(formData)</code></td><td>Обработка входа</td></tr>
+            <tr><td><code>handleLogout()</code></td><td>Обработка выхода</td></tr>
+            <tr><td><code>checkAuth()</code></td><td>Проверка авторизации</td></tr>
+            <tr><td><code>updateAuthUI()</code></td><td>Обновление UI авторизации</td></tr>
+            <tr><td><code>getCurrentUser()</code></td><td>Получение текущего пользователя</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>4.5. OrderController</h3>
+    <p>Управляет оформлением заказа.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>init()</code></td><td>Инициализация страницы оформления</td></tr>
+            <tr><td><code>handleSubmitOrder(formData)</code></td><td>Отправка заказа</td></tr>
+            <tr><td><code>renderOrderSummary()</code></td><td>Рендеринг сводки заказа</td></tr>
+            <tr><td><code>validateOrderForm(form)</code></td><td>Делегирование валидации модели</td></tr>
+            <tr><td><code>handlePaymentMethodChange(method)</code></td><td>Обработка смены способа оплаты</td></tr>
+            <tr><td><code>handleShippingMethodChange(method)</code></td><td>Обработка смены доставки</td></tr>
+            <tr><td><code>showOrderConfirmation(order)</code></td><td>Показ подтверждения заказа</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    
+    <h2>5. JS код взаимодействия с серверной частью (AJAX)</h2>
+    
+    <h3>5.1. Класс ApiService</h3>
+    <p>Сервис для выполнения HTTP-запросов к серверу через AJAX (XMLHttpRequest).</p>
+    
+    <pre>
+/**
+ * Сервис для работы с API сервера
+ * Все запросы выполняются через AJAX (XMLHttpRequest)
+ */
+class ApiService {
+    constructor(baseUrl = '/api') {
+        this.baseUrl = baseUrl;
+    }
+
+    /**
+     * Базовый метод для выполнения AJAX запросов
+     * @param {string} method - HTTP метод (GET, POST, PUT, DELETE)
+     * @param {string} endpoint - Конечная точка API
+     * @param {object} data - Данные для отправки
+     * @returns {Promise} - Промис с результатом
+     */
+    request(method, endpoint, data = null) {
+        return new Promise((resolve, reject) => {
+            // Создание объекта XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            
+            // Настройка запроса
+            xhr.open(method, this.baseUrl + endpoint, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Accept', 'application/json');
+            
+            // Добавление токена авторизации если есть
+            const token = StorageService.get('authToken');
+            if (token) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            }
+            
+            // Обработчик успешного ответа
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        resolve(response);
+                    } catch (e) {
+                        resolve(xhr.responseText);
+                    }
+                } else {
+                    reject({
+                        status: xhr.status,
+                        message: xhr.statusText,
+                        response: xhr.responseText
+                    });
+                }
+            };
+            
+            // Обработчик ошибки сети
+            xhr.onerror = function() {
+                reject({
+                    status: 0,
+                    message: 'Ошибка сети',
+                    response: null
+                });
+            };
+            
+            // Обработчик таймаута
+            xhr.ontimeout = function() {
+                reject({
+                    status: 0,
+                    message: 'Превышено время ожидания',
+                    response: null
+                });
+            };
+            
+            // Установка таймаута (30 секунд)
+            xhr.timeout = 30000;
+            
+            // Отправка запроса
+            if (data) {
+                xhr.send(JSON.stringify(data));
+            } else {
+                xhr.send();
+            }
+        });
+    }
+}</pre>
+    
+    <h3>5.2. Методы для работы с API</h3>
+    
+    <pre>
+// GET запрос - получение списка книг
+getBooks(filters = {}) {
+    let query = this.buildQueryString(filters);
+    return this.request('GET', '/books' + query);
+}
+
+// GET запрос - получение одной книги
+getBook(id) {
+    return this.request('GET', '/books/' + id);
+}
+
+// POST запрос - регистрация пользователя
+register(userData) {
+    return this.request('POST', '/auth/register', userData);
+}
+
+// POST запрос - авторизация
+login(credentials) {
+    return this.request('POST', '/auth/login', credentials);
+}
+
+// POST запрос - создание заказа
+createOrder(orderData) {
+    return this.request('POST', '/orders', orderData);
+}
+
+// PUT запрос - обновление корзины
+updateCart(cartData) {
+    return this.request('PUT', '/cart', cartData);
+}
+
+// DELETE запрос - удаление товара из корзины
+removeFromCart(bookId) {
+    return this.request('DELETE', '/cart/items/' + bookId);
+}</pre>
+    
+    <h3>5.3. Примеры использования AJAX в контроллерах</h3>
+    
+    <pre>
+// Пример загрузки книг в CatalogController
+async loadBooks(filters) {
+    this.showLoading(this.container);
+    
+    try {
+        // AJAX запрос через ApiService
+        const response = await this.apiService.getBooks(filters);
+        
+        // Преобразование данных в модели Book
+        const books = response.data.map(data => Book.fromJSON(data));
+        
+        // Рендеринг результата
+        this.renderBooks(books);
+    } catch (error) {
+        this.showError(this.container, 'Ошибка загрузки каталога');
+    }
+}
+
+// Пример добавления в корзину
+async addToCart(bookId) {
+    try {
+        // Получение книги с сервера
+        const bookData = await this.apiService.getBook(bookId);
+        const book = Book.fromJSON(bookData);
+        
+        // Добавление в модель корзины
+        this.cart.addItem(book, 1);
+        
+        // Сохранение на сервере
+        await this.apiService.updateCart(this.cart.toJSON());
+        
+        // Обновление UI
+        this.updateCartCounter();
+        this.showSuccess(document.body, 'Товар добавлен в корзину');
+    } catch (error) {
+        this.showError(document.body, 'Ошибка добавления в корзину');
+    }
+}
+
+// Пример оформления заказа
+async submitOrder(formData) {
+    try {
+        // Создание заказа из корзины
+        const order = Order.createFromCart(this.cart, formData);
+        
+        // Валидация через модель
+        const validation = order.validate();
+        if (!validation.isValid) {
+            throw new Error(validation.errors.join(', '));
+        }
+        
+        // Отправка на сервер
+        const response = await this.apiService.createOrder(order.toJSON());
+        
+        // Очистка корзины
+        this.cart.clear();
+        await this.apiService.updateCart(this.cart.toJSON());
+        
+        // Показ подтверждения
+        this.showOrderConfirmation(response);
+    } catch (error) {
+        this.showError(this.form, error.message);
+    }
+}</pre>
+
+    <div class="page-break"></div>
+    
+    <h2>6. CSS для адаптивной вёрстки</h2>
+    
+    <p>Адаптивная вёрстка реализована с использованием подхода "Mobile First" и медиа-запросов CSS.</p>
+    
+    <h3>6.1. Основные брейкпоинты</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Брейкпоинт</th>
+                <th>Ширина</th>
+                <th>Устройства</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Мобильные (по умолчанию)</td><td>до 480px</td><td>Смартфоны в портретном режиме</td></tr>
+            <tr><td>Большие мобильные</td><td>481px - 768px</td><td>Смартфоны в ландшафтном режиме, маленькие планшеты</td></tr>
+            <tr><td>Планшеты</td><td>769px - 1024px</td><td>Планшеты, небольшие ноутбуки</td></tr>
+            <tr><td>Десктоп</td><td>1025px - 1200px</td><td>Ноутбуки, мониторы</td></tr>
+            <tr><td>Большой десктоп</td><td>от 1201px</td><td>Большие мониторы</td></tr>
+        </tbody>
+    </table>
+    
+    <h3>6.2. Примеры адаптивных стилей</h3>
+    
+    <pre>
+/* ======================================
+   MOBILE FIRST - Базовые стили (до 480px)
+   ====================================== */
+
+/* Навигация скрыта на мобильных */
+.nav__list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Кнопка меню видна */
+.nav__toggle {
+    display: block;
+}
+
+/* Сетка в 1 колонку */
+.grid--4 {
+    grid-template-columns: 1fr;
+}
+
+/* Каталог вертикальный */
+.catalog {
+    flex-direction: column;
+}
+
+.catalog__sidebar {
+    width: 100%;
+}
+
+/* ======================================
+   ПЛАНШЕТЫ (769px - 1024px)
+   ====================================== */
+@media screen and (min-width: 769px) {
+    /* Навигация горизонтальная */
+    .nav__list {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .nav__toggle {
+        display: none;
+    }
+    
+    /* Сетка в 2 колонки */
+    .grid--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Каталог с боковой панелью */
+    .catalog {
+        flex-direction: row;
+    }
+    
+    .catalog__sidebar {
+        width: 250px;
+    }
+}
+
+/* ======================================
+   ДЕСКТОП (от 1025px)
+   ====================================== */
+@media screen and (min-width: 1025px) {
+    /* Сетка в 4 колонки */
+    .grid--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Увеличенные отступы */
+    .main-content {
+        padding: 60px 0;
+    }
+    
+    /* Hero секция больше */
+    .hero {
+        padding: 100px 0;
+    }
+    
+    .hero__title {
+        font-size: 56px;
+    }
+}</pre>
+    
+    <h3>6.3. Адаптивные компоненты</h3>
+    
+    <p><strong>Корзина:</strong></p>
+    <pre>
+/* Мобильная версия - вертикальная раскладка */
+.cart {
+    flex-direction: column;
+}
+
+.cart__summary {
+    width: 100%;
+    position: relative;
+}
+
+/* Планшет и выше - горизонтальная с боковой сводкой */
+@media screen and (min-width: 769px) {
+    .cart {
+        flex-direction: row;
+    }
+    
+    .cart__summary {
+        width: 350px;
+        position: sticky;
+        top: 100px;
+    }
+}</pre>
+    
+    <p><strong>Формы:</strong></p>
+    <pre>
+/* Мобильная версия - поля в столбец */
+.form__row {
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Планшет и выше - поля в строку */
+@media screen and (min-width: 769px) {
+    .form__row {
+        flex-direction: row;
+        gap: 20px;
+    }
+}</pre>
+    
+    <p><strong>Шапка сайта:</strong></p>
+    <pre>
+/* Мобильная версия */
+.header__inner {
+    flex-wrap: wrap;
+}
+
+.header__actions {
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Десктоп */
+@media screen and (min-width: 769px) {
+    .header__inner {
+        flex-wrap: nowrap;
+    }
+    
+    .header__actions {
+        flex-direction: row;
+        gap: 20px;
+    }
+}</pre>
+    
+    <h3>6.4. Дополнительные адаптивные техники</h3>
+    
+    <ul>
+        <li><strong>Гибкие изображения:</strong> <code>max-width: 100%; height: auto;</code></li>
+        <li><strong>Относительные единицы:</strong> использование rem, em, % вместо px</li>
+        <li><strong>Flexbox:</strong> основной инструмент для гибкой раскладки</li>
+        <li><strong>CSS Grid:</strong> для сеток товаров с автоматическим переносом</li>
+        <li><strong>Скрытие/показ элементов:</strong> классы .hidden-mobile, .hidden-desktop</li>
+        <li><strong>Touch-friendly:</strong> увеличенные области касания для мобильных (min 44x44px)</li>
+    </ul>
+    
+    <hr style="margin: 40px 0;">
+    
+    <p style="text-align: center; color: #666;">
+        <em>Отчёт подготовлен автоматически. Дата создания: 2024</em>
+    </p>
+</body>
+</html>

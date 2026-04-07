@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - BookStore</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">
+                <span class="header__logo-icon">B</span>
+                <span class="header__logo-text">BookStore</span>
+            </a>
+            
+            <nav class="header__nav">
+                <ul class="header__nav-list">
+                    <li class="header__nav-item">
+                        <a href="index.html" class="header__nav-link">Главная</a>
+                    </li>
+                    <li class="header__nav-item">
+                        <a href="catalog.html" class="header__nav-link">Каталог</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header__actions">
+                <a href="cart.html" class="header__cart">
+                    <span class="header__cart-icon">&#128722;</span>
+                    <span class="header__cart-count" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="header__auth-link header__auth-link--active">Вход</a>
+                <a href="register.html" class="header__auth-link">Регистрация</a>
+            </div>
+            
+            <button class="header__burger" id="burgerMenu">
+                <span class="header__burger-line"></span>
+                <span class="header__burger-line"></span>
+                <span class="header__burger-line"></span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="header__mobile-menu" id="mobileMenu">
+            <nav class="header__mobile-nav">
+                <a href="index.html" class="header__mobile-link">Главная</a>
+                <a href="catalog.html" class="header__mobile-link">Каталог</a>
+                <a href="cart.html" class="header__mobile-link">Корзина</a>
+                <a href="login.html" class="header__mobile-link header__mobile-link--active">Вход</a>
+                <a href="register.html" class="header__mobile-link">Регистрация</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="auth">
+                <div class="auth__container">
+                    <h1 class="auth__title">Вход в аккаунт</h1>
+                    <p class="auth__subtitle">Войдите, чтобы получить доступ к истории заказов и персональным рекомендациям</p>
+                    
+                    <form class="auth__form" id="loginForm">
+                        <div class="form__group">
+                            <label for="email" class="form__label">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form__input" 
+                                placeholder="example@mail.ru"
+                                required
+                            >
+                            <span class="form__error" id="emailError"></span>
+                        </div>
+                        
+                        <div class="form__group">
+                            <label for="password" class="form__label">Пароль</label>
+                            <div class="form__password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form__input" 
+                                    placeholder="Введите пароль"
+                                    required
+                                >
+                                <button type="button" class="form__password-toggle" id="togglePassword">
+                                    <span class="form__password-icon">&#128065;</span>
+                                </button>
+                            </div>
+                            <span class="form__error" id="passwordError"></span>
+                        </div>
+                        
+                        <div class="form__row form__row--between">
+                            <label class="form__checkbox-label">
+                                <input type="checkbox" name="remember" class="form__checkbox">
+                                <span class="form__checkbox-text">Запомнить меня</span>
+                            </label>
+                            <a href="#" class="form__link">Забыли пароль?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn--primary btn--full">
+                            Войти
+                        </button>
+                        
+                        <div class="auth__divider">
+                            <span class="auth__divider-text">или</span>
+                        </div>
+                        
+                        <div class="auth__social">
+                            <button type="button" class="btn btn--social btn--google">
+                                <span class="btn__icon">G</span>
+                                Google
+                            </button>
+                            <button type="button" class="btn btn--social btn--vk">
+                                <span class="btn__icon">VK</span>
+                                ВКонтакте
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <p class="auth__footer">
+                        Нет аккаунта? <a href="register.html" class="auth__footer-link">Зарегистрироваться</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__column">
+                    <div class="footer__logo">
+                        <span class="footer__logo-icon">B</span>
+                        <span class="footer__logo-text">BookStore</span>
+                    </div>
+                    <p class="footer__description">
+                        Ваш надежный книжный магазин с широким выбором литературы на любой вкус.
+                    </p>
+                </div>
+                
+                <div class="footer__column">
+                    <h4 class="footer__title">Навигация</h4>
+                    <ul class="footer__list">
+                        <li class="footer__item"><a href="index.html" class="footer__link">Главная</a></li>
+                        <li class="footer__item"><a href="catalog.html" class="footer__link">Каталог</a></li>
+                        <li class="footer__item"><a href="cart.html" class="footer__link">Корзина</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__column">
+                    <h4 class="footer__title">Жанры</h4>
+                    <ul class="footer__list">
+                        <li class="footer__item"><a href="catalog.html?genre=fiction" class="footer__link">Фантастика</a></li>
+                        <li class="footer__item"><a href="catalog.html?genre=romance" class="footer__link">Романы</a></li>
+                        <li class="footer__item"><a href="catalog.html?genre=detective" class="footer__link">Детективы</a></li>
+                        <li class="footer__item"><a href="catalog.html?genre=adventure" class="footer__link">Приключения</a></li>
+                        <li class="footer__item"><a href="catalog.html?genre=educational" class="footer__link">Учебные материалы</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__column">
+                    <h4 class="footer__title">Контакты</h4>
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <span class="footer__contact-icon">&#128222;</span>
+                            +7 (800) 123-45-67
+                        </li>
+                        <li class="footer__item">
+                            <span class="footer__contact-icon">&#128231;</span>
+                            info@bookstore.ru
+                        </li>
+                        <li class="footer__item">
+                            <span class="footer__contact-icon">&#128205;</span>
+                            Москва, ул. Книжная, 1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2024 BookStore. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/models/Book.js"></script>
+    <script src="js/models/User.js"></script>
+    <script src="js/models/Cart.js"></script>
+    <script src="js/models/Order.js"></script>
+    <script src="js/services/StorageService.js"></script>
+    <script src="js/services/ApiService.js"></script>
+    <script src="js/controllers/BaseController.js"></script>
+    <script src="js/controllers/UserController.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize user controller for login
+            const userController = new UserController();
+            
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.type === 'password' ? 'text' : 'password';
+                    passwordInput.type = type;
+                });
+            }
+            
+            // Handle login form submission
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(loginForm);
+                    const data = {
+                        email: formData.get('email'),
+                        password: formData.get('password'),
+                        remember: formData.get('remember') === 'on'
+                    };
+                    
+                    userController.login(data);
+                });
+            }
+            
+            // Update cart count
+            const cart = new Cart();
+            cart.loadFromStorage();
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = cart.getTotalItems();
+            }
+            
+            // Mobile menu toggle
+            const burgerMenu = document.getElementById('burgerMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (burgerMenu && mobileMenu) {
+                burgerMenu.addEventListener('click', function() {
+                    burgerMenu.classList.toggle('header__burger--active');
+                    mobileMenu.classList.toggle('header__mobile-menu--active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
